@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  gram_text: MyString
+  type: 1
+  hash: MyString
+  count: 1
+
+two:
+  gram_text: MyString
+  type: 1
+  hash: MyString
+  count: 1

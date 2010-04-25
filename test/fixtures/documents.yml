@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  doc_number: MyString
+  corpus: MyString
+
+two:
+  doc_number: MyString
+  corpus: MyString
