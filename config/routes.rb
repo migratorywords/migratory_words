@@ -2,8 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   
 
   map.resources :documents
-  map.resources :pr_categories
-  # The priority is based upon order of creation: first created -> highest priority.
+  map.resources :pr_categories  # The priority is based upon order of creation: first created -> highest priority.
+  map.resources :corpora
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
