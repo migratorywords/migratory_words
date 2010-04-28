@@ -1,1 +1,10 @@
-<%= image_tag("mbrds.jpg")%>
+<div style="text-align:left;">
+	<% form_remote_tag :url=>process_data_path, :success=>"main(request.responseJSON);return false;", :html=>{:id=>"my_form"}  do -%>
+		<p>Please copy the text: </p>
+		<textarea name="input_text" rows="20" cols="150">Input Text</textarea>
+		<div class="submit" style="clear:both">
+      <%= submit_tag 'Submit' %>
+      <!-- <%= submit_tag "Cancel",:onClick => "$('change_settings').toggle();return false;" %> -->
+    </div>		
+	<%-end%>
+</div>

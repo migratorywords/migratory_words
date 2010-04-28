@@ -1,0 +1,24 @@
+<table style="text-align:left;">
+	<tr>
+		<th>doc_number</th>
+		<th>corpus</th>
+		<th>Category</th>	
+		<th>author</th>	
+		<th>published_time</th>	
+		<th>geo_region</th>
+		<th>geo_place</th>
+		<th>description</th>				
+	</tr>
+	<%- @documents.each do |d|%>
+	<tr>
+		<td><%="#{d.doc_number}"%></td>
+		<td><%="#{d.corpus}"%></td>	
+		<td><%="#{d.pr_categories[0].name}"%></td>	
+		<td><%="#{d.author}"%></td>	
+		<td><%="#{d.published_time}"%></td>	
+		<td><%="#{d.geo_region}"%></td>
+		<td><%="#{d.geo_place}"%></td>
+		<td><%="#{d.description}"%></td>				
+	</tr>
+	<%- end %>
+</table>

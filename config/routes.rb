@@ -1,4 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :documents
+
+  
+  map.resources :pr_categories
+  
+  #named route
+  map.process_data 'process_data', :controller => 'home', :action => 'process_data'
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
