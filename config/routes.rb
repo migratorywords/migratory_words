@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :documents
+<<<<<<< HEAD
 
   
   map.resources :pr_categories
@@ -8,6 +9,10 @@ ActionController::Routing::Routes.draw do |map|
   map.process_data 'process_data', :controller => 'home', :action => 'process_data'
   
   # The priority is based upon order of creation: first created -> highest priority.
+=======
+  map.resources :pr_categories  # The priority is based upon order of creation: first created -> highest priority.
+  map.resources :corpora
+>>>>>>> 760b59d1885736430d7b2678e8dc19cca93d1d63
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
