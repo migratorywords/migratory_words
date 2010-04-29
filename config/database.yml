@@ -4,8 +4,8 @@ development:
   reconnect: false
   database: migratory_words_development
   pool: 5
-  user: root
-  password:
+  username: root
+  password: ramnagar
   socket: 
 
 # Warning: The database defined as "test" will be erased and
@@ -17,8 +17,8 @@ test:
   reconnect: false
   database: migratory_words_test
   pool: 5
-  user: root
-  password:
+  username: root
+  password: ramnagar
   socket: 
 
 production:
@@ -27,6 +27,6 @@ production:
   reconnect: false
   database: 
   pool: 5
-  user: 
+  username: root
   password: 
   socket: 
