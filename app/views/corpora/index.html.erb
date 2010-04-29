@@ -1,0 +1,15 @@
+<table style="text-align:left;">
+	<tr>
+		<th>Name</th>
+		<th>Fullname</th>
+		<th>Category</th>	
+		<th>from</th>	
+	</tr>
+	<%- @corpora.each do |c|%>
+	<tr>
+		<td><%="#{c.name}"%></td>
+		<td><%="Corpus long name"%></td>	
+		<td><%="type"%></td>	
+	</tr>
+	<%- end %>
+</table>
