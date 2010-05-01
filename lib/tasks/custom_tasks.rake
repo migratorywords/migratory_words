@@ -1,5 +1,6 @@
 
 corpus_location = "/Users/viallon/migratory_words/corpus/"
+index_location = "/Users/viallon/migratory_words/indextable/"
 
 
 def loadhash(corpus)
@@ -59,5 +60,26 @@ task :import_pr_categories => :environment do
     File.open(file_name).each do |l|
         cat_num, cat_name = l.split(':')
         PrCategory.create(:pr_number=>cat_num.strip.to_i, :name=>cat_name.strip)
+    end
+end
+
+
+#Importing all the documents
+task :import_document_index => :environment do
+    corpora_index = Corpus.all.inject({}){|a,e| a[e.name]=e.id;a}
+    corpus_index_file = 'fr.csv'
+    File.open(index_location + corpus_index_file).each do |line|
+        begin
+            contents = line.split(',')
+            corpus, doc_id, trackback_url, published_time, publisher, author = contents[0..5]
+            title, keywords, categories, description,type, geo_region, geo_place = contents[6..12]
+            brooking_program, prnewswire_su, prnewswire_stock, louisdb_congress, louisdb_type, louisdb_number, louisdb_version = contents [13..19]
+             
+            #puts corpora_index[corpus]
+            #puts author
+            Doc.create(:doc_name=>doc_id,:corpus_id=>corpora_index[corpus])
+        rescue
+            puts "some problem in #{file_name} in line : #{line}"
+        end
     end
 end

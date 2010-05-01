@@ -1,0 +1,24 @@
+<div class="left">
+    <h4>Documents</h4>
+    <h5><%= "Total documents in #{@corpus.name} : #{@docs.count}"%></h5>
+    <table style="width:400px;border:1px solid #666">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>document_name</th>
+            <th>date_published</th>
+            <th>source</th>
+            <th># ngrams</th>
+        </tr>
+        </thead>
+        <%@docs.each do |doc|%>
+            <%="<tr>
+                <td>#{doc.id}</td>
+                <td>#{doc.doc_name}</td>
+                <td>Date</td>
+                <td>source</td>
+                <td>##</td>
+            </tr>"%>
+        <%end%>
+    </table>
+</div>

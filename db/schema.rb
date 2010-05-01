@@ -9,18 +9,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100428010255) do
+ActiveRecord::Schema.define(:version => 20100501081905) do
 
   create_table "corpora", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "corpus", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "corpus", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
+  create_table "docs", :force => true do |t|
+    t.string   "doc_name"
+    t.datetime "pub_date"
+    t.integer  "corpus_id"
+    t.string   "author"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,11 +53,20 @@ ActiveRecord::Schema.define(:version => 20100428010255) do
 
   create_table "ngrams", :force => true do |t|
     t.string   "gram_text"
-    t.integer  "type"
+    t.integer  "ngram_type"
     t.string   "hash"
     t.integer  "count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "rarity_score"
+    t.integer  "corpus_id"
+  end
+
+  add_index "ngrams", ["gram_text"], :name => "gram_text", :unique => true
+
+  create_table "ngrams_docs", :force => true do |t|
+    t.integer "ngram_id"
+    t.integer "doc_id"
   end
 
   create_table "ngrams_documents", :force => true do |t|
