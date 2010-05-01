@@ -24,7 +24,7 @@ body {text-align: center;}
 .header .header_menu li a{color:#d9eee9};
 .container {margin:12px auto;width:960px;text-align:left;} 
 .container .error{margin-bottom:10px;background:#d2d1d1;padding:4px;color:#D30000;text-align:center;}
-.container .left{float:left;width:58%;}
+.container .left{float:left;width:58%;text-align:left;margin:0px 0px 0px 20px}
 .container .right{float:right;width:40%;}
 .footer{border-top:2px solid #a8aaab;color:#525455;text-align:center;margin:0px;margin-top:20px; padding:7px;font-size:11px;background:#d9dadb}
 
@@ -43,10 +43,3 @@ tr.row-label td { font-size:9px; padding-top:2px; padding-bottom:0; border-botto
 tr.alt { background:#f6f6f6; }
 .row1 { background:#EDF3FE; }
 .row2 { background:white; }
-
-
-
-
-
-
-

@@ -13,3 +13,28 @@
 	</tr>
 	<%- end %>
 </table>
+<div class="left">
+    <h4>Corpora</h4>
+    <table style="width:400px;border:1px solid #666">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Corpus</th>
+            <th>nick_name</th>
+            <th>type</th>
+            <th>source</th>
+            <th># documents</th>
+        </tr>
+        </thead>
+        <%@corpora.each do |corpus|%>
+            <%="<tr>
+                <td>#{corpus.id}</td>
+                <td>#{link_to(corpus.name, corpora_docs_path(corpus))}</td>
+                <td>#{corpus.name}</td>
+                <td>Type</td>
+                <td>source</td>
+                <td>#{corpus.docs.count}</td>
+            </tr>"%>
+        <%end%>
+    </table>
+</div>
