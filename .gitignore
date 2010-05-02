@@ -1,6 +1,6 @@
 # Can ignore specific files
 .DS_Store
-
+.config/database.yml
 # Use wildcards as well
 *~
 *.swp
