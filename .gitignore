@@ -1,11 +1,10 @@
 # Can ignore specific files
 .DS_Store
-.config/database.yml
 # Use wildcards as well
 *~
 *.swp
-
-# Can also ignore all directories and files in a directory.
+log/*.log
 tmp/**/*
-log/**/*
-test/**/*
+config/database.yml
+db/*.sqlite3
+mkmf.log
