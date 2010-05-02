@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   
   # The priority is based upon order of creation: first created -> highest priority.
   map.resources :pr_categories  # The priority is based upon order of creation: first created -> highest priority.
-  map.resources :corpora, :has_many => :docs
+  map.resources :corpora, :has_many => :docs, :collection => { :get_corpora_stat => :get }
   map.resources :docs
 
   # Sample of regular route:
