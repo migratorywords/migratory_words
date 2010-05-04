@@ -7,6 +7,9 @@ h4 {font-size: 1.2857em;line-height: 1.2em;margin: 1.6667em 0 .3887em;font-weigh
 h5 {font-size: 1em;line-height: 1.5em;margin: 1em 0 .5em;font-weight: bold;}
 h6 {font-size: 1em;line-height: 1.5em;margin: 1em 0 .5em;font-weight: normal;}
 
+.left {float: left;}
+.right {float: right;}
+
 ol li{margin:4px 0px 4px 0px;}
 input{border:1px solid #bcbcbd;}
 .upload{border:4px solid gray;}
@@ -29,7 +32,7 @@ body {text-align: center;}
 .footer{border-top:2px solid #a8aaab;color:#525455;text-align:center;margin:0px;margin-top:20px; padding:7px;font-size:11px;background:#d9dadb}
 
 /* TABLES */
-table {width:100%;}
+table {width:100%; margin: auto;}
 td, th { font-size:12px; line-height:13px; border-bottom:1px solid #eee; vertical-align:top; padding:5px;}
 th { text-align:left; font-size:12px; font-weight:bold; }
 thead th, 

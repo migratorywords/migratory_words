@@ -1,0 +1,17 @@
+<%= @results %>
+
+<table border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>Text</th>
+    <th>Length</th>
+    <th>Score</th>
+  </tr>
+  <% for item in @results %>
+    <%= '<tr><td><strong>'+item[:text]+'</strong><br><ul>' %>
+      <% for doc in item[:docs] %>
+      <%= '<li><a href="'+doc.trackback_url+'" target="_blank">['+doc.corpus.long_name+'] '+doc.title+' ('+doc.published_time.to_s+')</a></li>' %>
+      <% end %>
+    <%= '</ul></td><td>'+item[:length].to_s+'</td><td>'+item[:score].to_s+'</td></tr>' %>
+  <% end %>
+</table><br>
+

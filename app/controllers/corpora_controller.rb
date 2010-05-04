@@ -5,7 +5,11 @@ class CorporaController < ApplicationController
     
     def get_corpora_stat
       @corpora = Corpus.find(:all)
-      result = @corpora.inject({}){|a,c| a[c] = c.docs.count}
+      result = @corpora.inject({}) do |a,c| 
+        a[c.corpus_type] ||= {}
+        a[c.corpus_type][c.long_name]=c.doc_count
+        a
+      end
       render :json => result
     end
 end

@@ -1,0 +1,194 @@
+<% content_for :css do -%>
+  <style type="text/css" media="screen">
+    table.filter {width: 960px;}
+  </style>
+<% end -%>
+
+<% content_for :js do -%>
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function  () {
+      $('#checkbox-corpus,#doc-type').buttonset();
+      $('input:submit').button();
+      $('#button-corpus-all').toggle(
+        function  () {
+          $('#checkbox-corpus input').each(function  () {
+            this.checked = true;
+          });
+          $('#checkbox-corpus input').button('refresh');
+        },
+        function  () {
+          $('#checkbox-corpus input').each(function  () {
+            this.checked = false;
+          });
+          $('#checkbox-corpus input').button('refresh');
+        }
+      );
+      $('#button-clear-dates').click(function  () {
+        $('#date-from').val(''); $('#date-to').val('');
+      })
+      $('#slider-word-length').slider({min:2, max:8, step:1, values:[<%= params[:length_min] %>,<%= params[:length_max] %>], slide:updateWordLength, change:updateWordLength});
+      $('#date-from,#date-to').datepicker({minDate:'-50Y', maxDate:'0', changeMonth:true, changeYear:true, dateFormat:'yy-mm-dd'});
+    });
+    
+    function updateWordLength () {
+      var lengthVals = $('#slider-word-length').slider('values');
+      $('#slider-word-length').parent().find('span:first').text(lengthVals[0]);
+      $('#slider-word-length').parent().find('span:last').text(lengthVals[1]);
+      $('#length-min').val(lengthVals[0]);
+      $('#length-max').val(lengthVals[1]);
+    }
+  </script>
+<% end -%>
+
+<%= params.to_json() %>
+<form action="/overall" method="get" accept-charset="utf-8">
+  <table class="filter">
+    <tr class="ui-widget-header">
+      <th width="100">Filter Name</th>
+      <th>Filter Value</th>
+    </tr>
+    <tr>
+      <td>
+        <strong>Document Type</strong> (N/A)
+      </td>
+      <td>
+        <div id="doc-type">
+          <input type="radio" id="radio-documents" name="doc_type" value="documents" <% if params[:doc_type] == 'documents' %>checked="checked"<% end %> /><label for="radio-documents">Documents</label>
+          <input type="radio" id="radio-ngrams" name="doc_type" value="ngrams" <% if params[:doc_type] == 'ngrams' %>checked="checked"<% end %> /><label for="radio-ngrams">n-Grams</label>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Corpus</strong> (Documents, N-Grams)
+        <a href="#" id="button-corpus-all">All/None</a>
+      </td>
+      <td>
+        <select id="corpus" name="corpus">
+          <% for item in @corpus_id %>
+            <%= option_corpus(item) %>
+          <% end %>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Word Length</strong> (N-Grams)
+      </td>
+      <td>
+        <div id="slider-word-length"></div><br />n-Gram Length: <span><%= params[:length_min] %></span> - <span><%= params[:length_max] %></span>
+        <input type="text" name="length_min" value="<%= params[:length_min] %>" id="length-min">
+        <input type="text" name="length_max" value="<%= params[:length_max] %>" id="length-max">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Date Range</strong> (Documents)
+      </td>
+      <td>
+        From: <input type="text" id="date-from" name="date_from" value="<%= params[:date_from] %>"> - To: <input type="text" id="date-to" name="date_to" value="<%= params[:date_to] %>">
+        <a href="#" id="button-clear-dates">Clear Dates</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Title</strong> (Documents)
+      </td>
+      <td>
+        <input type="text" name="title" value="<%= params[:title] %>" id="title" maxlength="50">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>N-Gram Keyword</strong> (N-Grams)
+      </td>
+      <td>
+        <input type="text" name="ngrams_keyword" value="<%= params[:ngrams_keyword] %>" id="ngrams-keyword" maxlength="50">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Author</strong> (Documents)
+      </td>
+      <td>
+        <input type="text" name="author" value="<%= params[:author] %>" id="author" maxlength="50">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Documents Sort Order</strong> (Documents)
+      </td>
+      <td>
+        <select name="documents_sort_order" id="documents-sort-order">
+          <option value="corpus" <% if params[:documents_sort_order] == 'corpus' %>selected="selected"<% end %>>Corpus</option>
+          <option value="title" <% if params[:documents_sort_order] == 'title' %>selected="selected"<% end %>>Title</option>
+          <option value="author" <% if params[:documents_sort_order] == 'author' %>selected="selected"<% end %>>Author</option>
+          <option value="date" <% if params[:documents_sort_order] == 'date' %>selected="selected"<% end %>>Date</option>
+        </select>
+        <select name="documents_sort_direction" id="documents-sort-direction">
+          <option value="asc" <% if params[:documents_sort_direction] == 'asc' %>selected="selected"<% end %>>Ascending</option>
+          <option value="desc" <% if params[:documents_sort_direction] == 'desc' %>selected="selected"<% end %>>Descending</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>N-Grams Sort Order</strong> (N-Grams)
+      </td>
+      <td>
+        <select name="ngrams_sort_order" id="ngrams-sort-order">
+          <option value="text" <% if params[:ngrams_sort_order] == 'text' %>selected="selected"<% end %>>Text</option>
+          <option value="length" <% if params[:ngrams_sort_order] == 'length' %>selected="selected"<% end %>>Length</option>
+          <option value="rarity" <% if params[:ngrams_sort_order] == 'rarity' %>selected="selected"<% end %>>Rarity Score</option>
+        </select>
+        <select name="ngrams_sort_direction" id="ngrams-sort-direction">
+          <option value="asc" <% if params[:ngrams_sort_direction] == 'asc' %>selected="selected"<% end %>>Ascending</option>
+          <option value="desc" <% if params[:ngrams_sort_direction] == 'desc' %>selected="selected"<% end %>>Descending</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Pagination</strong> (Documents, N-Grams)
+      </td>
+      <td>
+        Start Index: <input type="text" name="start_index" value="<%= params[:start_index] %>" id="start-index" maxlength="10"> / 
+        Results Per Page: <input type="text" name="rpp" value="<%= params[:rpp] %>" id="rpp" maxlength="10">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" value="Search"></td>
+    </tr>
+  </table>
+</form>
+
+<hr />
+
+<% if params[:doc_type] == 'documents' %>
+<table>
+  <tr>
+    <% for item in @doc_fields %>
+      <th><%= item %></th>
+    <% end %>
+  </tr>
+  <% if !@results.blank? %>
+    <% for item in @results %>
+    <tr>
+      <% for col in @doc_fields %>
+        <td><%= item[col.to_sym] %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  <% else %>
+    
+  <% end %>
+</table>
+<%= @results.to_json %>
+<% end %>
+
+<% if params[:doc_type] == 'ngrams' %>
+<table>
+  <tr><th>Header</th></tr>
+  <tr><td>Data</td></tr>
+</table>
+<% end %>

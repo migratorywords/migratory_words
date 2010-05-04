@@ -7,9 +7,9 @@
 # all the migrations from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's very strongly recommended to check this file into your version control system.
+# It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100501081905) do
+ActiveRecord::Schema.define(:version => 20100502205517) do
 
   create_table "corpora", :force => true do |t|
     t.string "name"
@@ -29,6 +29,11 @@ ActiveRecord::Schema.define(:version => 20100501081905) do
     t.string   "author"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "docs_ngrams", :id => false, :force => true do |t|
+    t.integer "ngram_id"
+    t.integer "doc_id"
   end
 
   create_table "documents", :force => true do |t|
@@ -51,6 +56,38 @@ ActiveRecord::Schema.define(:version => 20100501081905) do
     t.integer  "pr_category_id"
   end
 
+  create_table "new_ngrams", :force => true do |t|
+    t.string   "corpus"
+    t.string   "doc_id"
+    t.string   "trackback_url"
+    t.datetime "published_time"
+    t.string   "publisher"
+    t.string   "author"
+    t.string   "title"
+    t.string   "keywords"
+    t.string   "categories"
+    t.string   "description"
+    t.string   "doc_type"
+    t.string   "geo_region"
+    t.string   "geo_place"
+    t.string   "brooking_program"
+    t.string   "prnewswire_su"
+    t.string   "prnewswire_stock"
+    t.string   "louisdb_congress"
+    t.string   "louisdb_session"
+    t.string   "louisdb_volume"
+    t.string   "louisdb_section"
+    t.string   "louisdb_chamber"
+    t.string   "louisdb_type"
+    t.integer  "louisdb_number"
+    t.string   "louisdb_version"
+    t.string   "louisdb_startpage"
+    t.string   "louisdb_endpage"
+    t.string   "louisdb_speaker"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ngrams", :force => true do |t|
     t.string   "gram_text"
     t.integer  "ngram_type"
@@ -63,11 +100,6 @@ ActiveRecord::Schema.define(:version => 20100501081905) do
   end
 
   add_index "ngrams", ["gram_text"], :name => "gram_text", :unique => true
-
-  create_table "ngrams_docs", :force => true do |t|
-    t.integer "ngram_id"
-    t.integer "doc_id"
-  end
 
   create_table "ngrams_documents", :force => true do |t|
     t.integer "ngram_id"

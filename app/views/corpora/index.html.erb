@@ -1,40 +1,32 @@
-<table style="text-align:left;">
-	<tr>
-		<th>Name</th>
-		<th>Fullname</th>
-		<th>Category</th>	
-		<th>from</th>	
-	</tr>
-	<%- @corpora.each do |c|%>
-	<tr>
-		<td><%="#{c.name}"%></td>
-		<td><%="Corpus long name"%></td>	
-		<td><%="type"%></td>	
-	</tr>
-	<%- end %>
-</table>
 <div class="left">
     <h4>Corpora</h4>
-    <table style="width:400px;border:1px solid #666">
+    <div id="corpora_map" style="width:700px"></div>
+    <div style="width:900px">
+    <table style="border:1px solid #666">
         <thead>
         <tr>
-            <th>#</th>
             <th>Corpus</th>
-            <th>nick_name</th>
-            <th>type</th>
-            <th>source</th>
-            <th># documents</th>
+            <th># Documents</th>
+            <th>Type</th>
+            <th>Source</th>
+            <th>Start date</th>
+            <th>End date</th>
         </tr>
         </thead>
         <%@corpora.each do |corpus|%>
             <%="<tr>
-                <td>#{corpus.id}</td>
-                <td>#{link_to(corpus.name, corpora_docs_path(corpus))}</td>
-                <td>#{corpus.name}</td>
-                <td>Type</td>
+                <td>#{link_to(corpus.long_name, corpora_documents_path(corpus))}</td>
+                <td>#{corpus.doc_count}</td>
+                <td>#{corpus.corpus_type}</td>
                 <td>source</td>
-                <td>#{corpus.docs.count}</td>
+                <td>start_date</td>
+                <td>end_date</td>
             </tr>"%>
         <%end%>
     </table>
+    </div>
 </div>
+
+
+
+

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :new_ngrams
+
   map.resources :documents
 
   
@@ -9,8 +11,10 @@ ActionController::Routing::Routes.draw do |map|
   
   # The priority is based upon order of creation: first created -> highest priority.
   map.resources :pr_categories  # The priority is based upon order of creation: first created -> highest priority.
-  map.resources :corpora, :has_many => :docs, :collection => { :get_corpora_stat => :get }
-  map.resources :docs
+  map.resources :corpora, :has_many => :documents, :collection => { :get_corpora_stat => :get }
+  map.resources :documents
+  map.connect 'overall', :controller => "home", :action => "overall"
+  map.connect 'tool', :controller => "home", :action => "tool"
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

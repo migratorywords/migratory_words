@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  doc_name: MyString
+  pub_date: 2010-04-29 17:55:45
+  corpus_id: 1
+  author: MyString
+
+two:
+  doc_name: MyString
+  pub_date: 2010-04-29 17:55:45
+  corpus_id: 1
+  author: MyString

@@ -1,24 +1,24 @@
-<table style="text-align:left;">
-	<tr>
-		<th>doc_number</th>
-		<th>corpus</th>
-		<th>Category</th>	
-		<th>author</th>	
-		<th>published_time</th>	
-		<th>geo_region</th>
-		<th>geo_place</th>
-		<th>description</th>				
-	</tr>
-	<%- @documents.each do |d|%>
-	<tr>
-		<td><%="#{d.doc_number}"%></td>
-		<td><%="#{d.corpus}"%></td>	
-		<td><%="#{d.pr_categories[0].name}"%></td>	
-		<td><%="#{d.author}"%></td>	
-		<td><%="#{d.published_time}"%></td>	
-		<td><%="#{d.geo_region}"%></td>
-		<td><%="#{d.geo_place}"%></td>
-		<td><%="#{d.description}"%></td>				
-	</tr>
-	<%- end %>
-</table>
+<div class="left">
+    <h4>Documents</h4>
+    <h5><%= "Total documents in #{@corpus.name} : #{@documents.count}"%></h5>
+    <table style="width:400px;border:1px solid #666">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>document_name</th>
+            <th>date_published</th>
+            <th>source</th>
+            <th># ngrams</th>
+        </tr>
+        </thead>
+        <%@documents.each do |doc|%>
+            <%="<tr>
+                <td>#{doc.id}</td>
+                <td>#{doc.doc_name}</td>
+                <td>#{doc.published_time}</td>
+                <td>source</td>
+                <td>##</td>
+            </tr>"%>
+        <%end%>
+    </table>
+</div>
