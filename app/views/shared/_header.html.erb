@@ -1,13 +1,14 @@
+<div class="logo">
+  <%= link_to(image_tag("MWlogo.png"),root_url)%>
+</div>
+
+
 <div class="header">
-  <div>
-    <!--<%= link_to(image_tag("logo.jpg"),root_url)%>-->
-    <span class="logo"><%= link_to("Migratory words",root_url)%></span>
-    <span class="profile"><b>Birds with similar words flock together</b> </span>
-    <ul class="header_menu">
-      <li class="index"><%=link_to("Home",root_url)%></li>
-      <li class="index"><%=link_to("About us",root_url)%></li>
-      <li class="index"><%=link_to("Help",root_url)%></li>
-    </ul>
-  </div>
+      <ul class="header_menu">
+        <li class="index"><%=link_to("Corpora",corpora_index_path)%></li>
+        <li class="index"><%=link_to("About us",root_url)%></li>
+        <li class="index"><%=link_to("Help",root_url)%></li>
+      </ul>
+      <div class="clear"></div>
 </div>
 

@@ -1,0 +1,2 @@
+class NgramsController < ApplicationController
+end

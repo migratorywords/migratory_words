@@ -1,17 +1,29 @@
-<%= @results %>
+<% content_for :js do -%><%= javascript_include_tag "front" %><% end -%>
 
-<table border="0" cellspacing="5" cellpadding="5">
-  <tr>
-    <th>Text</th>
-    <th>Length</th>
-    <th>Score</th>
-  </tr>
-  <% for item in @results %>
-    <%= '<tr><td><strong>'+item[:text]+'</strong><br><ul>' %>
-      <% for doc in item[:docs] %>
-      <%= '<li><a href="'+doc.trackback_url+'" target="_blank">['+doc.corpus.long_name+'] '+doc.title+' ('+doc.published_time.to_s+')</a></li>' %>
-      <% end %>
-    <%= '</ul></td><td>'+item[:length].to_s+'</td><td>'+item[:score].to_s+'</td></tr>' %>
-  <% end %>
-</table><br>
+<div class="left" style="width:30%;">
+  <%= render :partial=>"/shared/search_form", :locals=>{:corpora=>@corpora}-%>
+</div>
 
+
+<!-- The right side -->
+<div class="right" style="width:65%;margin:0px 10px">
+  <h4> <%="#{@results[:ngrams].count} ngrams found"%></h4>
+  <div class="ngrams_list">
+    <% for item in @results[:ngrams] %>
+      <div class="ngram_box">
+        <div class="title_box"> 
+          <span style="font-weight:bold;font-size:15px;color:#1a508c"><a href="#" onclick="show_details(this)"><%= item[:text].titlecase%></a></span>
+          <br/>
+          <span style="color:#999999;"><%="Found in #{item[:docs].count} documents"%></span>
+        </div>
+        <div class="documents_box">
+          <ul class="doc_list">
+          <% for i in item[:docs][0..5] %>
+            <li><%=i[:context]%></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

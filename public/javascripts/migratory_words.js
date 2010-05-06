@@ -2,6 +2,7 @@ function main(response){
   console.log(response)
 }
 
+//UTILITIES
 
 
 //VISUALIZATON SCRIPTS
@@ -22,8 +23,8 @@ var re = '';
 var color = pv.Colors.category19().by(function(n) {return n.keys.slice(0, -1)});
 /* Root panel. */
 var vis = new pv.Panel()
-.width(900)
-.height(300).canvas("corpora_map");
+.width(800)
+.height(500).canvas("corpora_map");
     
 /* Treemap! */
 vis.add(pv.Bar)

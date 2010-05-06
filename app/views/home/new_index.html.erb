@@ -1,0 +1,5 @@
+<% content_for :js do -%><%= javascript_include_tag "front" %><% end -%>
+
+<div style="width:50%;margin:50px auto;text-align:left;">
+  <%= render :partial=>"/shared/search_form",:locals=>{:corpora=>@corpora}%>
+</div>

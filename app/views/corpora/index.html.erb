@@ -1,7 +1,19 @@
-<div class="left">
-    <h4>Corpora</h4>
-    <div id="corpora_map" style="width:700px"></div>
-    <div style="width:900px">
+<% content_for :js do -%><%= javascript_include_tag "front" %><% end -%>
+
+<div class="left" style="width:30%;">
+  <%= render :partial=>"/shared/search_form", :locals=>{:corpora=>@corpora}-%>
+</div>
+
+<!-- The right side -->
+<div class="right" style="width:67%;margin:0px 10px">
+    <div class="heading">
+      <span style="float:left;font-size:25px;">Migratory Word Corpora</span>
+      <span style="float:left;line-height:37px;margin-left:30px;"><a href="#">Tabular view</a></span>
+    </div>
+    <div style="clear:both;">Total documents : <%=@corpora.inject(0){|a,e| a = a+e.doc_count} %></div>
+    <div id="corpora_map"></div>
+    <!--
+    <div>
     <table style="border:1px solid #666">
         <thead>
         <tr>
@@ -18,15 +30,12 @@
                 <td>#{link_to(corpus.long_name, corpora_documents_path(corpus))}</td>
                 <td>#{corpus.doc_count}</td>
                 <td>#{corpus.corpus_type}</td>
-                <td>source</td>
-                <td>start_date</td>
-                <td>end_date</td>
+                <td>Source</td>
+                <td>#{corpus.start_date}</td>
+                <td>#{corpus.end_date}</td>
             </tr>"%>
         <%end%>
     </table>
     </div>
+    -->
 </div>
-
-
-
-
