@@ -10,9 +10,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pr_categories  # The priority is based upon order of creation: first created -> highest priority.
   map.resources :corpora, :has_many => :documents, :collection => { :get_corpora_stat => :get }
   map.resources :documents
-  map.resources :home, :collection => {:overall=>:get, :tool=>:get, :new_index=>:get}
+  map.resources :home, :collection => {:overall=>:get, :tool=>:get, :new_index=>:get, :new_tool=>:get}
   #map.connect 'overall', :controller => "home", :action => "overall"
-  #map.connect 'tool', :controller => "home", :action => "tool"
+  map.connect 'tool', :controller => "home", :action => "tool"
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

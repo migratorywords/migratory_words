@@ -3,6 +3,9 @@ require 'open-uri'
 require "cgi"
 
 class HomeController < ApplicationController
+  
+  include ProxySearcher
+  
   def index
     @corpus_id = 'bills cr fr hearings presidential reports prnewswire thehill aei brookings cato cfr cgdev civitas fraser nber ncpa rand urban'.split()
     @corpus_name = 'Bills,Congressional Records,Federal Register,Congressional Hearings,Presidential Records,Congressional Reports,PR Newswire,The Hill,AEI,Brookings,Cato,Center for Foreign Relations,Center for Global Development,Civitas,Fraser,National Bureau of Economic Research,National Center for Policy Analysis,Rand Corp.,Urban Institute'.split(',')
@@ -18,6 +21,7 @@ class HomeController < ApplicationController
 
 
   def tool
+    @corpora = Corpus.all
     corpus_id = 'bills cr fr hearings presidential reports prnewswire thehill aei brookings cato cfr cgdev civitas fraser nber ncpa rand urban'.split()
     params[:corpus] = 'all' if not params.has_key?(:corpus) or not corpus_id.include?(params[:corpus])
     params[:order] = 'doc' if not params.has_key?(:order) or not 'doc rarity'.split().include?(params[:order])
@@ -49,7 +53,12 @@ class HomeController < ApplicationController
       @body = f.read
     }
   end
-  
+ 
+  def new_tool
+    input_text = params[:input_text]
+    render :json=>get_data_from_michael(input_text).to_json
+  end
+
   def overall
     @corpus_id = 'bills cr fr hearings presidential reports prnewswire thehill aei brookings cato cfr cgdev civitas fraser nber ncpa rand urban'.split()
     @corpus_name = 'Bills,Congressional Records,Federal Register,Congressional Hearings,Presidential Records,Congressional Reports,PR Newswire,The Hill,AEI,Brookings,Cato,Center for Foreign Relations,Center for Global Development,Civitas,Fraser,National Bureau of Economic Research,National Center for Policy Analysis,Rand Corp.,Urban Institute'.split(',')
