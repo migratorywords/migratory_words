@@ -11,13 +11,7 @@ $(document).ready(function(){
         url: 'corpora/get_corpora_stat',
         success: function(data) {
         render_treemap(data);
-    };
-    $.ajax({
-        url: 'ngrams/get_ngram_stat',
-        success: function(data) {
-        render_ngram_timeline(data);
     }
-
 });
 
 });
@@ -49,5 +43,4 @@ vis.render();
 }
 
 
-function render_ngram_timeline(data){
 

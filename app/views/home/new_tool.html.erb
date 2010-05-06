@@ -1,0 +1,14 @@
+<div class="right" style="width:65%;margin:0px 10px">
+  <h4> <%="#{@results['ngrams'].count} ngrams found"%></h4>
+  <div class="ngrams_list">
+    <% for item in @results['ngrams'] %>
+      <div class="ngram_box">
+        <div class="title_box"> 
+          <span style="font-weight:bold;font-size:15px;color:#1a508c"><a href="#" onclick="show_details(this)"><%= item['text'].titlecase%></a></span>
+          <br/>
+          <span style="color:#999999;"><%="Found in #{item[:docs].count} documents"%></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
