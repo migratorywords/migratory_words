@@ -1,13 +1,15 @@
-<% content_for :js do -%><%= javascript_include_tag "front" %><% end -%>
-
+<% content_for :js do -%>
+  <%= "<script type='text/javascript'>$(document).ready(function(){show_treemap(false)});</script> "%>
+<% end -%>
 <div class="left" style="width:30%;">
   <%= render :partial=>"/shared/search_form", :locals=>{:corpora=>@corpora}-%>
 </div>
-
 <!-- The right side -->
 <div class="right" style="width:67%;margin:0px 10px">
     <div class="heading">
       <span style="float:left;font-size:25px;">Migratory Word Corpora</span>
+      <input type="radio" name="group1" value="document_count" onclick="show_treemap(false)" checked> Document count &nbsp;&nbsp;&nbsp;
+            <input type="radio" name="group1" value="document_size" onclick="show_treemap(true)"> Document size
       <span style="float:left;line-height:37px;margin-left:30px;"><a href="#">Tabular view</a></span>
     </div>
     <div style="clear:both;">Total documents : <%=@corpora.inject(0){|a,e| a = a+e.doc_count} %></div>

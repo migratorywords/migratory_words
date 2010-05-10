@@ -7,7 +7,7 @@ class CorporaController < ApplicationController
       @corpora = Corpus.find(:all)
       result = @corpora.inject({}) do |a,c| 
         a[c.corpus_type] ||= {}
-        a[c.corpus_type][c.long_name]=c.doc_count
+        a[c.corpus_type][c.long_name]= params[:disk_size]=='true' ? c.disk_size : c.doc_count
         a
       end
       render :json => result

@@ -1,0 +1,21 @@
+<div class="ngram_box">
+  <!-- ngram title -->
+  <div class="title_box"> 
+    <span style="font-weight:bold;font-size:15px;color:#1a508c">
+      <span onclick="show_details(this,<%=index%>)">
+        <%=ngram['text'].capitalize %>
+      </span>
+    </span>
+    <span  style="float:right;" onclick='add_to_favorite(<%=ngram.to_json%>)'>Add to favorite</span><br/>
+    <span>Found in: <%= ngram['doc_count'] %> documents | <%= ngram['original'] %></span>
+  </div>
+  <div class="ngram_detail" style="display:none;">
+    <div id="<%="ngram_#{index}"%>" class="viz"></div>
+    <% if ngram['doc_count'].to_i <= 20 %>
+    <div>
+      <span class="link" onclick="<%="get_document_context('#{ngram["text"]}',#{index})"%>">Get context</span>
+      </div>
+    <div id="<%="docs_#{index}"%>" class="tabular"></div>
+    <% end %>
+  </div>
+</div>

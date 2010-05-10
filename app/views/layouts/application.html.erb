@@ -12,9 +12,8 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
     <%= javascript_include_tag "protovis-3.1/protovis-d3.1" %>
-		<%= javascript_include_tag "migratory_words" %>
+    <%= javascript_include_tag "visualization_script" %>
 		<%= yield :js %>
-
   </head>
   <body>
     <%= render :partial=>"/shared/header" -%>
@@ -23,6 +22,7 @@
       <div class="clear"></div>
     </div>
     <%= render :partial=>"/shared/footer" -%>
+		<%= javascript_include_tag "migratory_words" %>
   </body>
 </html>
 

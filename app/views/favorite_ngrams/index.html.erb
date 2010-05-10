@@ -1,0 +1,26 @@
+<div class="left">
+    <h4>Favorite Ngrams</h4>
+    <h5><%= "Total #{@fav_ngrams.count}"%></h5>
+    <table style="width:400px;border:1px solid #666">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>ngram</th>
+            <th>length</th>
+            <th>score</th>
+            <th>fav-count</th>
+            <th>documents</th>
+        </tr>
+        </thead>
+        <%@fav_ngrams.each do |ng|%>
+            <%="<tr>
+                <td>#{ng.id}</td>
+                <td>#{ng.gram_text}</td>
+                <td>#{ng.ngram_type}</td>
+                <td>#{ng.rarity_score}</td>
+                <td>#{ng.fav_count}</td>
+                <td>#{ng.documents.count}</td>
+            </tr>"%>
+        <%end%>
+    </table>
+</div>

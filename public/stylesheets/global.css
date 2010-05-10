@@ -9,6 +9,7 @@ h6 {font-size: 1em;line-height: 1.5em;margin: 1em 0 .5em;font-weight: normal;}
 
 
 ol li{margin:4px 0px 4px 0px;}
+li{text-decoration:none}
 .upload{border:4px solid gray;}
 textarea{border:1px solid #bcbcbd;}
 .clear{clear:both;margin-top:-1px;height:1px;overflow:hidden;}
@@ -20,12 +21,19 @@ body {text-align: center;}
 .header ul{float:right;margin-right:100px;padding:6px;}
 .header .header_menu li{list-style:none;padding:3px;display:inline;margin-right:6px;background:#ab3334;color:#fff}
 .header .header_menu li a{color:#fff};
-.container {margin:1px auto;text-align:center} 
-.container .left{float:left;width:30%;text-align:left;margin:25px 0px 0px 10px}
-.container .right{float:right;width:67%;text-align:left;}
+.container {margin:1px auto;text-align:center;padding:10px;} 
+.container .left{float:left;width:25%;text-align:left;margin:25px 0px 0px 10px}
+.container .center{float:left;width:47%;text-align:left;margin:25px 0px 0px 10px}
+.container .right{float:right;width:20%;text-align:left;margin:25px 10px 0px 0px}
 .footer{border-top:2px solid #a8aaab;color:#525455;text-align:center;margin:0px;margin-top:20px; padding:7px;font-size:11px;background:#d9dadb}
-.heading{margin-top:16px;}
 
+.heading{font-weight:bold;font-size:20px;color:#686868;}
+.about_us{margin-left:10px;}
+.about_us .content{line-height:16px;color:#686868;}
+.fav_ngrams{}
+.favt_grams ul{margin:0px;}
+.favt_grams ul li{list-style:none;margin:3px 0px;}
+.link{cursor:pointer;color:#3c4570}
 .input_form{background:#e0eefc;text-align:left;padding:5px 0px 0px 0px;margin-right:5px}
 .input_form .input_text{clear:both;padding:5px;}
 .input_form .submit_box{padding:3px 6px;background:#b5d7f4;text-align:center}
@@ -36,9 +44,10 @@ body {text-align: center;}
 #word-length{width:100px;}
 span.highlight{background:yellow}
 .ngrams_list{float:left;text-align:left;width:100%}
-.ngrams_list .ngram_box{margin:4px 0px;border-bottom:1px solid #e0e0e0}
-.ngrams_list .ngram_box .title_box{padding:5px;}
-.ngrams_list .ngram_box .documents_box{}
+.ngrams_list .ngram_box{margin:4px 4px;border-bottom:1px solid #e0e0e0}
+.ngrams_list .ngram_box .title_box{padding:3px 0px;cursor: pointer;}
+.ngrams_list .ngram_box .ngram_detail{border:1px solid #d6d6d6; background:#e5e5e5;padding:0px 0px 3px 5px}
+.ngrams_list .ngram_box .ngram_detail .viz{overflow:auto;max-height:300px;width:100%}
 ul.doc_list li{list-style:none;padding:3px;}
 
 

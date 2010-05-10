@@ -1,0 +1,2 @@
+module FavoriteNgramsHelper
+end

@@ -1,6 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :ngrams, :collection => {:ngram_detail=>:get}
-  map.resources :documents
+  map.resources :favorite_ngrams
+
+  map.resources :ngrams, :collection => {:ngram_detail=>:get, :get_ngrams_fake => :get}
+  map.resources :documents ,:collection => {:get_docs_by_ngram=>:get, :get_docs_with_context=>:get, :get_context => :get}
   map.resources :pr_categories
   
   #named route
@@ -10,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pr_categories  # The priority is based upon order of creation: first created -> highest priority.
   map.resources :corpora, :has_many => :documents, :collection => { :get_corpora_stat => :get }
   map.resources :documents
-  map.resources :home, :collection => {:overall=>:get, :tool=>:get, :new_index=>:get, :new_tool=>:get}
+  map.resources :home, :collection => {:overall=>:get, :tool=>:get, :new_index=>:get, :new_tool=>:get, :get_docs => :get, :get_context => :get, :process_data => :get, :get_docs_test=>:get}
   #map.connect 'overall', :controller => "home", :action => "overall"
   map.connect 'tool', :controller => "home", :action => "tool"
 

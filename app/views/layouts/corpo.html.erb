@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Migratory words Corpora</title>
+    <%= stylesheet_link_tag 'global' %>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+ 
+    <%= javascript_include_tag "protovis-3.1/protovis-d3.1" %>
+    <%= javascript_include_tag "visualization_script" %>
+  </head>
+  <body>
+    <%= render :partial=>"/shared/header" -%>
+    <div class="container">
+      <%= yield  %>
+      <div class="clear"></div>
+    </div>
+    <%= render :partial=>"/shared/footer" -%>
+		<%= javascript_include_tag "migratory_words" %>
+    <script type='text/javascript'>
+      $(document).ready(function(){
+        show_treemap(false)
+      });
+    </script>
+
+  </body>
+</html>
+
