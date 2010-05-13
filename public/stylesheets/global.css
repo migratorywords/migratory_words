@@ -1,4 +1,5 @@
-html,body{font-family: Helvetica, Arial, sans-serif;text-align:center;font-size:13px;color:#646464;}
+
+html,body{font-family:Georgia,serif;text-transform:none;text-align:center;font-size:13px;color:#646464;}
 html,body,p,ul,li,img{margin:0px;padding:0px;border:none}
 h1{font-size: 2.5em;line-height: 1em;margin: 0.6em 0 .2em;font-weight: bold;}
 h2 {font-size: 2.1428em;line-height: 1em;margin: 0.7em 0 .2333em;font-weight: bold;}
@@ -15,38 +16,57 @@ textarea{border:1px solid #bcbcbd;}
 .clear{clear:both;margin-top:-1px;height:1px;overflow:hidden;}
 a{color: #414a8a;text-decoration:none;}
 body {text-align: center;}
-.header{width:100%;border-bottom:1px solid #e0e0e0;margin-top:58px}
-.logo {float:left;position:absolute;top:5px;left:5px;}
+.header{margin:2px auto;position:relative;width:100%;border-bottom:1px solid #e0e0e0;margin-top:0px;background:#282828;font-variant:small-caps;}
+.logo {float:left;position:relative;top:20px;margin-left:10%;}
 .logo img{height:100px;}
-.header ul{float:right;margin-right:100px;padding:6px;}
-.header .header_menu li{list-style:none;padding:3px;display:inline;margin-right:6px;background:#ab3334;color:#fff}
-.header .header_menu li a{color:#fff};
-.container {margin:1px auto;text-align:center;padding:10px;} 
-.container .left{float:left;width:25%;text-align:left;margin:25px 0px 0px 10px}
+.header ul{float:right;margin:85px 10% 0px 0px;}
+.header .header_menu li{list-style:none;padding:3px 0px 0px 0px;display:inline;margin:0px 6px;}
+.header ul a:link{color:#999999;font-variant:small-caps;}
+.header ul a:visited{color:#999999;font-variant:small-caps;}
+.header ul a:hover{border-bottom:3px solid red;font-variant:small-caps;}
+.header ul a:active{border-bottom:3px solid red;font-variant:small-caps;}
+.header span.active{border-bottom:3px solid #aa3432;color:#fff}
+.container {margin:2px auto;text-align:left;padding:10px;width:80%} 
+.container .left{float:left;width:25%;text-align:left;margin:25px 0px 0px 0px}
 .container .center{float:left;width:47%;text-align:left;margin:25px 0px 0px 10px}
-.container .right{float:right;width:20%;text-align:left;margin:25px 10px 0px 0px}
+.container .right{float:right;width:20%;text-align:left;margin:25px 0px 0px 0px}
 .footer{border-top:2px solid #a8aaab;color:#525455;text-align:center;margin:0px;margin-top:20px; padding:7px;font-size:11px;background:#d9dadb}
 
-.heading{font-weight:bold;font-size:20px;color:#686868;}
 .about_us{margin-left:10px;}
-.about_us .content{line-height:16px;color:#686868;}
-.fav_ngrams{}
-.favt_grams ul{margin:0px;}
-.favt_grams ul li{list-style:none;margin:3px 0px;}
+.about_us .content{line-height:20px;font-size:20px;font-weight:normal;}
+.top_grams {width:100%;float:left;margin-top:20px;background:#e8e8e8}
+.top_grams .heading{background:#8c8c8c;padding:4px 10px;color:#fff;
+  border-radius-topleft: 0.5em;border-radius-topright: 0.5em;
+  -webkit-border-top-left-radius: 0.25em;-webkit-border-top-right-radius: 0.25em;
+  -moz-border-radius-topleft: 0.5em;-moz-border-radius-topright: 0.5em;}
+
+.top_grams .sub_heading{font-weight:bold;font-size:14px;margin:4px;border-bottom:1px solid #999999;}
+.top_grams .top_grams_box{width:24.9%;float:left;margin-top:20px;}
+.top_grams .top_grams_box ul{margin:5px;list-style:none;padding-left:10px;text-indent:-0.9em}
+.top_grams .top_grams_box ul li{list-style-position:inside;margin:3px 0px;margin:5px 0px}
+.top_grams .top_grams_box ul li:before{content: "\00BB \0020";}
+.top_grams .top_grams_box ul li a:link{color:#444444;}
+.top_grams .top_grams_box ul li a:visited{color:#444444;}
+.top_grams .top_grams_box ul li a:hover{text-decoration:underline;}
+.top_grams .top_grams_box ul li a:active{}
+
+
 .link{cursor:pointer;color:#3c4570}
-.input_form{background:#e0eefc;text-align:left;padding:5px 0px 0px 0px;margin-right:5px}
+.input_form{background:#e0eefc;text-align:left;padding:0px;}
 .input_form .input_text{clear:both;padding:5px;}
-.input_form .submit_box{padding:3px 6px;background:#b5d7f4;text-align:center}
+.input_form .submit_box{padding:3px 6px;background:#b5d7f4;text-align:right}
+.input_form .submit_box input{border:1px solid #962b2b;background:#aa3434;color:#fff}
 .input_form .filter_box{padding:5px;display:none;}
 .input_form .filter_box .filter{padding:5px;clear:both;margin:3px 0px}
 .input_form .filter_box .filter .label{float:left;width:85px;line-height:20px;}
 .input_form .filter_box .filter .widget{float:left;width:150px;}
 #word-length{width:100px;}
 span.highlight{background:yellow}
-.ngrams_list{float:left;text-align:left;width:100%}
-.ngrams_list .ngram_box{margin:4px 4px;border-bottom:1px solid #e0e0e0}
+.ngrams_list{width:100%}
+.ngrams_list p.section{padding:3px;color:#aa3432;border-bottom:2px solid #c4c4c4;font-weight:bold;margin:10px 0px 6px 0px;font-size:14px;}
+.ngrams_list .ngram_box{margin:4px 0px;border-bottom:1px solid #e0e0e0}
 .ngrams_list .ngram_box .title_box{padding:3px 0px;cursor: pointer;}
-.ngrams_list .ngram_box .ngram_detail{border:1px solid #d6d6d6; background:#e5e5e5;padding:0px 0px 3px 5px}
+.ngrams_list .ngram_box .ngram_detail{border:1px solid #d6d6d6; background:#e5e5e5;padding:0px 0px 3px 10px}
 .ngrams_list .ngram_box .ngram_detail .viz{overflow:auto;max-height:300px;width:100%}
 ul.doc_list li{list-style:none;padding:3px;}
 
@@ -67,3 +87,11 @@ tr.row-label td { font-size:9px; padding-top:2px; padding-bottom:0; border-botto
 tr.alt { background:#f6f6f6; }
 .row1 { background:#EDF3FE; }
 .row2 { background:white; }
+/*
+tr.inactive{background:#e5e5e5;color:black;}
+tr.active{background:#444444;color:#fff;}
+*/
+td span.hlgt{font-weight:bold;color:black;}
+
+
+/* From Michael*/

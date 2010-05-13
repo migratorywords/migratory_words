@@ -1,0 +1,58 @@
+<% content_for :js do -%>
+  <%= javascript_include_tag "front" %>
+  <script type="text/javascript" charset="utf-8">
+    // for context results per page
+    var rpp = 1;
+    var searchFormExpanded = false;
+    $(document).ready(function() {
+      $('#search_form textarea').css('height', '30px');
+      $('#search_form textarea').focus(function  () {
+        if (!searchFormExpanded) {
+          $(this).animate({height:'200px'}, {complete: function () {
+            searchFormExpanded = true;
+            $(this).focus();
+          }});
+        }
+      });
+      $('#search_form textarea').blur(function  () {
+        if (searchFormExpanded) {
+          $(this).animate({height:'30px'}, {complete: function  () {
+            searchFormExpanded = false;
+            $(this).blur();
+          }});
+        }
+      });
+      $('#search_form textarea').text(unescape('<%= @default_text %>'));
+    });
+  </script>
+<% end -%>
+
+<div style="text-align:left;margin:10px 0px 20px 0px"><%= link_to "Back", url_for(:back) %></div>
+<!-- top textarea -->
+<div id="search_form">
+  <%= render :partial=>"/shared/search_form", :locals=>{:corpora=>@corpora}-%>
+</div>
+<div>
+  <div id="test_map"></div>
+  <div id="context_docs_table"></div>
+</div>
+
+<div style="margin:0px 10px">
+  <h4> <%="#{@results['ngrams'][0].count + @results['ngrams'][1].count} Results found"%></h4>
+
+  <div class="ngrams_list">
+    <p class="section">Most Interesting:</p>
+    <% prev_index = 0 %>
+    <% @results['ngrams'][0].each_with_index do |ngram,index1| prev_index=index1+1 %>
+      <%= render :partial=>"ngram_box", :locals=>{:ngram=>ngram,:index=>index1}-%>
+    <% end %>
+  </div>
+
+  <div class="ngrams_list">
+    <p class="section">You may also be interested in:</p>
+    <% @results['ngrams'][1].each_with_index do |ngram,index2| %>
+      <%= render :partial=>"ngram_box", :locals=>{:ngram=>ngram,:index=>prev_index+index2}-%>
+    <% end %>
+  </div>
+
+</div>

@@ -1,14 +1,42 @@
-<div class="logo">
-  <%= link_to(image_tag("MWlogo.png"),root_url)%>
-</div>
-
 
 <div class="header">
-      <ul class="header_menu">
-        <li class="index"><%=link_to("Corpora",corpora_index_path)%></li>
-        <li class="index"><%=link_to("About us",root_url)%></li>
-        <li class="index"><%=link_to("Help",root_url)%></li>
-      </ul>
-      <div class="clear"></div>
+  <div class="logo">
+    <%= link_to(image_tag("MWlogo.png"),root_url)%>
+  </div>
+  <div style="position:absolute;top:10px;right:10%;font-size:45px;color:#fff;font-variant:small-caps;">Migratory Words</div>
+  <ul class="header_menu">
+    <li class="index">
+      <% if controller_name=='home' and action_name == 'index' %> 
+        <span class='active'>Home</span> 
+      <% else %>
+        <%=link_to("Home",root_path) %>
+      <% end %>
+    </li>
+    <li class="index">
+      <% if controller_name=='corpora' and action_name == 'index' %> 
+        <span class='active'>Corpora</span> 
+      <% else %>
+        <%=link_to("Corpora",corpora_index_path) %>
+      <% end %>
+    </li>
+    <li class="index">
+      <% if controller_name=='home' and action_name == 'methodology' %> 
+        <span class='active'>Methodology</span> 
+      <% else %>
+        <%=link_to("Methodology",methodology_home_path) %>
+      <% end %>
+    </li>
+    <li class="index">
+      <% if controller_name=='home' and action_name == 'about' %> 
+        <span class='active'>About Us</span> 
+      <% else %>
+        <%=link_to("About Us",about_home_path) %>
+      <% end %>
+    </li>   
+  </ul>
+  <div class="clear"></div>
 </div>
 
+<div style="position:absolute;font-size:12px;left:19%;line-height:20px;">
+Computational Tools For Investigative Political Research
+</div>

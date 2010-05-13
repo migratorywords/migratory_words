@@ -24,46 +24,88 @@ function show_details(elem,ngram_index){
     $('#ngram_'+ngram_index).text('loading...');
     $.getJSON('/documents/get_docs_by_ngram?ngram='+ngram, function (result) {
       if(!result['error']){
-        console.log(result);
         loaded_ngram.push(ngram_index);
         loaded_doc_id[ngram_index] = pv.blend(pv.values(result.documents).map(function(x){return x.map(function(d){return d.document.id})}));
         loaded_docs[ngram_index] = result.documents;
-        visualize_docs_timeline(ngram,result['documents'],ngram_index);
+        visualize_docs_timeline(ngram,result.documents,ngram_index,0,0);
         }
     });
   }
 }
 
-function get_document_context(ngram,ngram_index,doc_id){
-  if ($('#docs_'+ngram_index).children().size() == 0) {
-    $.getJSON('/documents/get_docs_with_context?ngram='+ngram+'&doc_id='+loaded_doc_id[ngram_index].join(','), function (data) {
-      construct_doc_table(data,ngram,ngram_index,doc_id);
+
+function get_document_context(ngram,ngram_index,doc_id,page){
+  var total_num_docs = loaded_doc_id[ngram_index].length;
+  var total_pages = Math.floor(total_num_docs/rpp) + 1;
+  if (doc_id != 0) {
+    var current_doc_index = -1;
+    $.each(loaded_doc_id[ngram_index], function  (i, v) {
+      if (doc_id == v) {
+        current_doc_index = i;
+        return false;
+      }
+    });
+    page = Math.floor(current_doc_index/rpp) + 1;
+  }
+  var chunked_doc_ids = loaded_doc_id[ngram_index].slice((page-1)*rpp, page*rpp);
+  if ($('#docs_'+ngram_index+' table#context_'+page).length == 0) {
+    $('#ajax-loader-'+ngram_index).show();
+    $.getJSON('/documents/get_docs_with_context?ngram='+ngram+'&doc_id='+chunked_doc_ids.join(','), function (data) {
+      construct_doc_table(data,ngram,ngram_index,doc_id,page,total_pages);
+      $('#ajax-loader-'+ngram_index).hide();
     });
   } else {
-    $('#docs_'+ngram_index+' tbody tr').css('background-color', 'transparent');
-    $('#context_row_'+doc_id).css('background-color', 'black');
+    show_doc_table(ngram_index,page,doc_id);
   }
 }
 
-function construct_doc_table(docs,ngram,ngram_index,selected_doc_id){
-  var div_id = 'docs_'+ngram_index
-  $("#"+div_id).append('<table cellspacing="0" cellpadding="2" border="1"><thead><tr><td>Document</td></tr></thead><tbody></tbody></table>');
-  $.each(loaded_doc_id[ngram_index], function  () {
+function construct_doc_table(docs,ngram,ngram_index,selected_doc_id,page,total_pages){
+  var div_id = 'docs_'+ngram_index;
+  var options = '';
+  for (var i=1;i<=total_pages;i++) {
+    if (i == page) options += '<option value="'+i+'" selected="selected">'+i+'</option>';
+    else options += '<option value="'+i+'">'+i+'</option>';
+  }
+  if (rpp > 1) {
+    var thead = '<thead><tr><td>Page '+page+' / Go to page <select onchange="get_document_context(\''+$.trim(ngram)+'\','+ngram_index+',0,this.value);">'+options+'</select></td></tr></thead>';
+  } else {
+    var thead = '';
+  }
+  $("#"+div_id).append('<table id="context_'+page+'">'+thead+'<tbody></tbody></table>');
+  $.each(loaded_doc_id[ngram_index].slice((page-1)*rpp, page*rpp), function(){
     var tdi = $(this)[0];   // temp_doc_id
-    if (tdi == selected_doc_id) $('#'+div_id+' table tbody').append('<tr id="context_row_'+tdi+'" onclick="visualize_docs_timeline(\''+ngram+'\', loaded_docs['+ngram_index+'], '+ngram_index+', '+tdi+')" style="background-color:black;"><td>'+tdi+docs[tdi].leftcontent+docs[tdi].ngram+docs[tdi].rightcontent+'</td></tr>');
-    else $('#'+div_id+' table tbody').append('<tr id="context_row_'+tdi+'" onclick="visualize_docs_timeline(\''+ngram+'\', loaded_docs['+ngram_index+'], '+ngram_index+', '+tdi+')"><td>'+tdi+docs[tdi].leftcontent+docs[tdi].ngram+docs[tdi].rightcontent+'</td></tr>');
-  })
+    if (tdi == selected_doc_id) var row_class = 'active';
+    else var row_class = 'inactive';
+    $('#'+div_id+' table#context_'+page+' tbody').append('<tr id="context_row_'+tdi+'" onclick="visualize_docs_timeline(\''+ngram+'\', loaded_docs['+ngram_index+'], '+ngram_index+', '+tdi+')" class="'+row_class+'"><td><h5 style="margin:0px;"><a href="'+docs[tdi].trackback_url+'">'+docs[tdi].title+'</a> | <span>'+docs[tdi].corpus+' ('+docs[tdi].published_time.replace(/T.*/g, '')+')</span></h5>'+docs[tdi].leftcontent+'<span class="hlgt">'+docs[tdi].ngram+'</span>'+docs[tdi].rightcontent+'</td></tr>');
+    // else $('#'+div_id+' table#context_'+page+' tbody').append('<tr id="context_row_'+tdi+'" onclick="visualize_docs_timeline(\''+ngram+'\', loaded_docs['+ngram_index+'], '+ngram_index+', '+tdi+')" class="inactive"><td>'+docs[tdi].leftcontent+'<span class="hlgt">'+docs[tdi].ngram+'</span>'+docs[tdi].rightcontent+'</td></tr>');
+  });
+  show_doc_table(ngram_index,page,selected_doc_id);
 }
+
+function show_doc_table (ngram_index,page,doc_id) {
+  var dn = '#docs_'+ngram_index;
+  $(dn+' tbody tr').css('background-color', 'transparent').css('color', '#222');
+  $(dn+' tbody tr span.hlgt').css('color', 'black');
+  $(dn+' tbody tr h5 a').css('color', '#414a8a');
+  if (rpp > 1) {
+    $(dn+' #context_row_'+doc_id).css('background-color', 'maroon').css('color', '#DDD');
+    $(dn+' #context_row_'+doc_id+' span.hlgt').css('color', 'white');
+    $(dn+' #context_row_'+doc_id+' h5 a').css('color', 'white');
+  }
+  $(dn+' table').hide();
+  $(dn+' table#context_'+page).show();
+}
+
 
 function highlight_doc (doc_id) {
   visualize_docs_timeline(ngram,data,ngram_index,doc_id);
 }
 
-
-function add_to_favorite(params){
-  console.log(params)
+function add_to_favorite(elem,params){
+  console.log(elem)
   $.post("/favorite_ngrams/create", params,
     function(data){    
+    console.log(elem.parent());
     });
 }
 

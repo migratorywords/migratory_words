@@ -3,13 +3,12 @@ class FavoriteNgramsController < ApplicationController
     @fav_ngrams = FavoriteNgram.all 
   end
   
-
   def create
     ngram_text = params[:text]
     ngram_score = params[:score]
     ngram_length = params[:length]
-    
-    ngram_from_db = FavoriteNgram.find_by_gram_text(ngram_text)
+    doc_count = params[:doc_count]
+    ngram_from_db = FavoriteNgram.find_by_text(ngram_text)
 
     unless ngram_from_db
       begin
@@ -17,7 +16,7 @@ class FavoriteNgramsController < ApplicationController
           all_doc_ids = ActiveSupport::JSON.decode(f.read)
           puts all_doc_ids
           all_doc_ids.map!{|x| x.to_i}
-          ng = FavoriteNgram.new(:gram_text=>ngram_text,:rarity_score=>ngram_score,:ngram_type=>ngram_length,:fav_count=>1)
+          ng = FavoriteNgram.new(:text=>ngram_text,:doc_count=>doc_count,:rarity_score=>ngram_score,:length=>ngram_length,:fav_count=>1)
           ng.document_ids= all_doc_ids
           ng.save
           render :json => {:error=>false, :ngram=>ng}
@@ -26,7 +25,8 @@ class FavoriteNgramsController < ApplicationController
          render :json => {:error=>true}
       end
     else
-      ngram_from_db.update_attribute(:fav_count=>ngram_from_db.fav_count + 1)
+      fvc = ngram_from_db.fav_count
+      ngram_from_db.update_attribute(:fav_count=>(fvc + 1))
       render :json => {:message => 'fav count updated'}
     end
   end

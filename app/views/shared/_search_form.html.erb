@@ -1,39 +1,10 @@
 <div class="input_form">
-  <form action="/home/tool" method="get" accept-charset="utf-8">
-    <div style="margin:2px 5px;">Input text</div>
+  <form action="/ngrams/search" method="get" accept-charset="utf-8">
     <div class="input_text"> 
-      <textarea name="input_text">Type a phrase you want to investigate or paste a bulk text.</textarea>
+      <textarea name="text">Type a phrase you want to investigate or paste a bulk text.</textarea>
     </div> 
     <div id="filter_toggle" style="margin-left:5px;"><a href="#">Show filters</a></div>
     <div class="filter_box">
-      <div class="filter">
-        <div class="label">
-        <span>Corpus</span>
-        </div>
-        <div class="widget">
-          <select name="corpus">
-    	      <option value="all">All</option>
-            <% corpora.each do |corpus| %>
-              <%="<option value='#{corpus.name}'>#{corpus.long_name}</option>" %>
-            <% end %>
-    	    </select><br>
-        </div>
-        <div class="clear"></div>
-      </div>
-
-      <div class="filter">
-        <div class="label">
-          <span>Ranking order</span>
-        </div>  
-        <div class="widget">
-          <select name="order">
-            <option value="doc"># of documents containing each n-gram</option>
-            <option value="rarity">Rarity of each n-gram</option>
-          </select>
-        </div> 
-        <div class="clear"></div>
-      </div>
-
       <div class="filter">
         <div class="label" style="width:95px;line-height:12px;">
           <span>Word length</span>
@@ -44,7 +15,7 @@
           <input type="hidden" name="word_length_max" value="8" id="word-length-max">
         </div>
         <div style="float:left;">
-          <span id="min">2</span> - <span id="max">8</span>
+          <span id="min">2</span> - <span id="max">6</span>
         </div>
         <div class="clear"></div>
       </div>
@@ -57,4 +28,3 @@
     <div class="clear"></div>
   </form>
 </div>
-

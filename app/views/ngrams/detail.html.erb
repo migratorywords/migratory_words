@@ -1,0 +1,15 @@
+<% content_for :js do -%>
+  <script type="text/javascript" charset="utf-8">
+    var rpp = 10;
+    $(document).ready(function() {
+      show_details($('div.title_box span.link'), 1);
+    });
+  </script>
+<% end -%>
+
+<div style="text-align:left;margin:10px 0px 20px 0px"><%= link_to "Back", url_for(:back) %></div>
+<div class="ngrams_list" style="width:100%;">
+  <%= render :partial=>"ngram_box", :locals=>{:ngram=>@ngram,:index=>1}-%>
+  
+</div>
+

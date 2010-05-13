@@ -1,84 +1,28 @@
-<% content_for :css do -%>
-  <style type="text/css" media="screen">
-    #filter {width: 960px; margin: auto; text-align: left; font-size: 12pt;}
-    #filter .left {width: 480px;}
-    textarea {padding:10px; font-size:12pt; width: 960px; height: 240px;}
-    #word-length {width: 135px; margin-top: 5px;}
-    select, input {font-size: 12pt;}
-  </style>
-<% end -%>
+<% content_for :js do -%><%= javascript_include_tag "front" %><% end -%>
 
-<% content_for :js do -%>
-  <script type="text/javascript" charset="utf-8">
-    var active_color = '#000';
-    var inactive_color = '#ccc';
-    $(document).ready(function  () {
-      $('input:submit').button().css('font-size', '16pt').css('margin-top', '20px');
-      
-      // textarea
-      $('textarea').addClass('ui-corner-all').css('margin-top', '20px');
-      $("textarea").css("color", inactive_color);
-      var default_values = new Array();
-      $("textarea").focus(function() {
-        if (!default_values[this.id]) {
-          default_values[this.id] = this.value;
-        }
-        if (this.value == default_values[this.id]) {
-          this.value = '';
-          this.style.color = active_color;
-        }
-        $(this).blur(function() {
-          if (this.value == '') {
-            this.style.color = inactive_color;
-            this.value = default_values[this.id];
-          }
-        });
-      });
-      
-      // slider
-      $('#word-length').slider({min:2, max:8, step:1, values:[2,8], slide:updateWordLength, change:updateWordLength});
-      
-    });
-    
-    function updateWordLength () {
-      var lengthVals = $('#word-length').slider('values');
-      $('#word-length').parent().find('span:first').text(lengthVals[0]);
-      $('#word-length').parent().find('span:last').text(lengthVals[1]);
-      $('#word-length-min').val(lengthVals[0]);
-      $('#word-length-max').val(lengthVals[1]);
-    }
-  </script>
-<% end -%>
+<div class="left about_us" style="width:40%;margin-top:40px;">
+  <!--<p class="heading">About us</p>-->
+  <p class="content">
+  Can computational systems help investigative journalists to identify patterns of intellectual influence that shape the creation of public policy?
+  <br/><br/>
+  Type or paste your text into the search box and let Migratory Words find the most interesting language as it has evolved and changed over time
+  <br/><br/><br/><%= link_to('Read more ...',about_home_path)%>
+  </p>
+</div>
 
-<div style="margin:auto;">
-	<form action="/tool" method="get" accept-charset="utf-8">
-	  <div id="filter">
-	    <div class="left">
-        <strong>Corpus:</strong>
-    	  <select name="corpus">
-    	    <option value="all">All</option>
-          <% for item in @corpus_id %>
-            <%= option_corpus(item) %>
-          <% end %>
-    	  </select><br>
+<div class="right" style="width:58%;margin-top:40px;">
+  <%= render :partial=>"/shared/search_form",:locals=>{:corpora=>@corpora}%>
+</div>
 
-    	  <strong>Ranking Order:</strong>
-    	  <select name="order">
-    	    <option value="doc"># of documents containing each n-gram</option>
-    	    <option value="rarity">Rarity of each n-gram</option>
-    	  </select><br>
-	    </div>
-  	  
-  	  <div class="right">
-    	  <strong>Word Length:</strong>
-        <span>2</span> - <span>8</span>
-        <div id="word-length"></div>
-    	  <input type="hidden" name="word_length_min" value="2" id="word-length-min">
-    	  <input type="hidden" name="word_length_max" value="8" id="word-length-max">
-  	  </div>
-	  </div>
 
-		<textarea name="input_text">Type a phrase you want to investigate or paste a bulk text.</textarea><br>
-	  <input type="submit" value="Investigate" />
-  </form>
+<div class="top_grams">
+  <p class="heading">
+  <span style="font-size:20px;font-weight:bold;">Top phrases</span>
+  <span style="float:right;font-weight:normal;font-size:13px;line-height:24px;"><%=link_to('View all', root_url)%></span>
+  </p>
+  <div>
+  <% @corpora_wise_grams.each do |c|%>
+    <%= render :partial=>'ngrams/top_corpus_grams', :locals=>{:corpus=>c} %>
+  <% end %>
+  </div>
 </div>

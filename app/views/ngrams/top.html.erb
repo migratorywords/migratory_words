@@ -1,0 +1,7 @@
+<div style="width:50%;margin:auto;">
+  <ul>
+    <% for c in @corpora -%>
+      <li style="list-style:none;"><h4><a href="/top/<%= c.name %>"><%= c.long_name %></a></h4></li>
+    <% end -%>
+  </ul>
+</div>

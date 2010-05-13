@@ -1,0 +1,15 @@
+<div class="top_grams_box">
+  <% if corpus[0]=="favorite"%>
+    <p class="sub_heading">Favorite phrases by users</p>
+  <% else %>
+    <p class="sub_heading"><%= corpus[0].long_name %></p>
+  <% end %>
+
+    <ul>
+      <% corpus[1].each do |c| %>
+      <li><%= link_to c.text.capitalize, detail_ngrams_path(:text=>c.text, :doc_count=>c.doc_count)%></li>
+      <% end %>
+    </ul>
+</div>
+
+

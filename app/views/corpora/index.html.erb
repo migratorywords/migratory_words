@@ -1,19 +1,26 @@
 <% content_for :js do -%>
-  <%= "<script type='text/javascript'>$(document).ready(function(){show_treemap(false)});</script> "%>
+  <%= "<script type='text/javascript'>$(document).ready(function(){show_treemap(true)});</script> "%>
 <% end -%>
-<div class="left" style="width:30%;">
-  <%= render :partial=>"/shared/search_form", :locals=>{:corpora=>@corpora}-%>
-</div>
-<!-- The right side -->
-<div class="right" style="width:67%;margin:0px 10px">
-    <div class="heading">
-      <span style="float:left;font-size:25px;">Migratory Word Corpora</span>
-      <input type="radio" name="group1" value="document_count" onclick="show_treemap(false)" checked> Document count &nbsp;&nbsp;&nbsp;
-            <input type="radio" name="group1" value="document_size" onclick="show_treemap(true)"> Document size
-      <span style="float:left;line-height:37px;margin-left:30px;"><a href="#">Tabular view</a></span>
-    </div>
-    <div style="clear:both;">Total documents : <%=@corpora.inject(0){|a,e| a = a+e.doc_count} %></div>
-    <div id="corpora_map"></div>
+
+<div class="left" style="width:100%;margin:0px 10px">
+
+  <h4>Migratory Word Corpora</h4> 
+  <div class="top_grams" style="width:999px">
+    <p class="heading">
+    <span style="font-size:15px;">
+      <!--Total documents : <%=@corpora.inject(0){|a,e| a = a+e.doc_count} %>-->
+      1153980 documents in 19 corpora
+    </span>
+    <span style="float:right;margin-left:10px;">
+      <input type="radio" name="g" value="dt" onclick="show_treemap(false)"/>Document count 
+    </span>
+    <span style="float:right;">
+      <input type="radio" name="g" value="de" onclick="show_treemap(true)" checked/>Document size
+    </span>
+    </p>
+  </div>
+
+<div id="corpora_map"></div>
     <!--
     <div>
     <table style="border:1px solid #666">

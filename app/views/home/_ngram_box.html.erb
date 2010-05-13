@@ -2,20 +2,39 @@
   <!-- ngram title -->
   <div class="title_box"> 
     <span style="font-weight:bold;font-size:15px;color:#1a508c">
-      <span onclick="show_details(this,<%=index%>)">
+      <span class="link" onclick="show_details(this,<%=index%>)">
         <%=ngram['text'].capitalize %>
       </span>
     </span>
-    <span  style="float:right;" onclick='add_to_favorite(<%=ngram.to_json%>)'>Add to favorite</span><br/>
-    <span>Found in: <%= ngram['doc_count'] %> documents | <%= ngram['original'] %></span>
+    <span style="float:right;font-size:11px;position:relative;margin-left:20px;"> 
+      <img src="/images/search_icon.gif"/>
+      <a style="position:relative;top:-3px" href='<%="http://128.32.33.245:3000/home/tool?input_text=#{ngram['text']}"%>' >Find similar</a>
+    </span>
+    <span style="float:right;font-size:11px;position:relative;margin-left:20px;"> 
+      <img src="/images/ab-icon-add-my-favorites.png"/>
+      <a style="position:relative;top:-3px" onclick='add_to_favorite(this,<%=ngram.to_json%>)'>Add to favorites</a>
+    </span>
+    <span style="float:right;font-size:11px;position:relative;"> 
+      <img src="/images/magnifier_zoom_in.png"/>
+      <a style="position:relative;top:-3px" href="/ngrams/detail?text=<%= ngram['text'].gsub(' ', '+') %>">See Details</a>
+    </span><br/>
+    <span>Found in: <%= ngram['doc_count'] %> documents<%= " | Present in the input text" if ngram['original'] %></span>
   </div>
   <div class="ngram_detail" style="display:none;">
-    <div id="<%="ngram_#{index}"%>" class="viz"></div>
-    <% if ngram['doc_count'].to_i <= 20 %>
     <div>
-      <span class="link" onclick="<%="get_document_context('#{ngram["text"]}',#{index})"%>">Get context</span>
-      </div>
+    <span>
+      <input type="radio" name="g" value="0" onclick="visualize_docs_timeline('<%=ngram['text']%>', loaded_docs[<%=index%>], <%=index%>,loaded_doc_id[<%=index%>],0);" checked />
+      Timeline view
+    </span>
+    <span>
+      <input type="radio" name="g" value="1"  onclick="visualize_docs_timeline('<%=ngram['text']%>', loaded_docs[<%=index%>], <%=index%>,loaded_doc_id[<%=index%>],1);" />
+      Corpora view
+    </span>
+    <span><%= link_to('view details',)%></span>
+    <span id="ajax-loader-<%=index%>" style="background-color:maroon;color:white;display:none;">Loading...</span>
+    
+    </div>
+    <div id="<%="ngram_#{index}"%>" class="viz"></div>
     <div id="<%="docs_#{index}"%>" class="tabular"></div>
-    <% end %>
   </div>
 </div>

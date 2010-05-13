@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :favorite_ngrams
 
-  map.resources :ngrams, :collection => {:ngram_detail=>:get, :get_ngrams_fake => :get}
+  map.resources :ngrams, :collection => {:search=>:get,:detail=>:get, :top=>:get, :get_top_ngrams => :get}
   map.resources :documents ,:collection => {:get_docs_by_ngram=>:get, :get_docs_with_context=>:get, :get_context => :get}
   map.resources :pr_categories
   
@@ -12,9 +12,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pr_categories  # The priority is based upon order of creation: first created -> highest priority.
   map.resources :corpora, :has_many => :documents, :collection => { :get_corpora_stat => :get }
   map.resources :documents
-  map.resources :home, :collection => {:overall=>:get, :tool=>:get, :new_index=>:get, :new_tool=>:get, :get_docs => :get, :get_context => :get, :process_data => :get, :get_docs_test=>:get}
+  map.resources :home, :collection => {:index=>:get, :about => :get, :methodology=>:get}
   #map.connect 'overall', :controller => "home", :action => "overall"
-  map.connect 'tool', :controller => "home", :action => "tool"
+  map.connect 'top', :controller => "ngrams", :action => "top"
+  map.connect 'top/:id', :controller => "ngrams", :action => "top_corpus"
+  
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
@@ -46,7 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "home"
+  map.root :controller => :home, :action=>:index
 
   # See how all your routes lay out with "rake routes"
 
