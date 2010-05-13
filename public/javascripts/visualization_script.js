@@ -5,10 +5,10 @@ function visualize_docs_timeline(ngram,data,ngram_index,doc_id,viz_type){
   test_data = data;
 
   //Common viz properties
-  var w = 600 // for now the width is constant
+  var w = 700 // for now the width is constant
   var color_index = pv.Colors.category20().range().map(function(d){return d.color});
   //Finding the distinct corpora in the data for the legend
-  all_corpus_ids = pv.blend(pv.values(test_data)).map(function(x){return x.document.corpus_id})
+  all_corpus_ids = pv.blend(pv.values(data)).map(function(x){return x.document.corpus_id})
   distinct_corpora  = pv.dict(all_corpus_ids,function(x){return true})
    
   var min_height = pv.keys(distinct_corpora).length * 25 // the minimu height depends upn the no of distinct corpora
@@ -16,13 +16,13 @@ function visualize_docs_timeline(ngram,data,ngram_index,doc_id,viz_type){
     .def("i",-1).bottom(15).right(25).canvas('ngram_'+ngram_index);
 
   var viz_panel = vis.add(pv.Panel).width(w).left(0);
-  var legends_panel = vis.add(pv.Panel).width(200).right(0).fillStyle('#e5e5e5');
+  var legends_panel = vis.add(pv.Panel).width(150).right(0).fillStyle('#e5e5e5');
   
   // drawing legends
   legends_panel.add(pv.Bar)
     .data(pv.keys(distinct_corpora))
-    .width(20).height(15).left(4)
-    .top(function(){return this.sibling()? this.sibling().top + 20 : 5})
+    .width(20).height(20).left(4)
+    .top(function(){return this.sibling()? this.sibling().top + 25 : 2})
     .fillStyle(function(d){return color_index[d]})
     .anchor('left').add(pv.Label)
       .left(26)
@@ -79,13 +79,13 @@ function visualize_docs_timeline(ngram,data,ngram_index,doc_id,viz_type){
     var cdata = pv.nest(flat_data).key(function(d){return d.document.corpus_id}).entries();
     var max_length = pv.max(cdata.map(function(d){return d.values.length}));
     var vscale = pv.Scale.ordinal(pv.range(cdata.length)).splitBanded(0,min_height,9/10);
-    var min_width = max_length * 11;
+    var min_width = max_length * 10;
     min_width = min_width < w ? w : min_width;
     vis.width(min_width + 250)
     var panels = viz_panel.add(pv.Panel)
       .data(cdata)
       .height(vscale.range().band)
-      .bottom(function(d){return vscale(this.index)})
+      .top(function(d){return vscale(this.index)})
       .add(pv.Bar)
         .data(function(d){return d.values})
         .height(22).width(10)

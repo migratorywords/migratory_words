@@ -6,12 +6,12 @@
   </ul>
 </div>
 <!-- The right side -->
-<div class="right" style="width:65%;margin:0px 10px">
+<div class="center" style="width:65%;margin:0px 10px">
   <h4>Top 1000 Ngrams in "<%= @current_corpus.long_name %>" corpus</h4>
 
   <div class="ngrams_list">
     <% @results['ngrams'].each_with_index do |ngram,index| %>
-      <%= render :partial=>"home/ngram_box", :locals=>{:ngram=>ngram,:index=>index}-%>
+      <%= render :partial=>"ngrams/ngram_box", :locals=>{:ngram=>ngram,:index=>index}-%>
     <% end %>
   </div>
 </div>

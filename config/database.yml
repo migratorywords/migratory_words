@@ -5,7 +5,7 @@ development:
   database: migratory_words_development
   pool: 5
   username: root 
-  password: 
+  password: serverstatnews
   socket: 
 
 # Warning: The database defined as "test" will be erased and
@@ -18,7 +18,7 @@ test:
   database: migratory_words_test
   pool: 5
   username: root
-  password: 
+  password: serverstatnews
   socket: 
 
 production:
@@ -28,5 +28,5 @@ production:
   database: 
   pool: 5
   username: root
-  password: 
+  password: serverstatnews
   socket: 
