@@ -22,7 +22,7 @@
           }});
         }
       });
-      $('#search_form textarea').text(unescape('<%= @default_text %>'));
+      $('#search_form textarea').text(unescape('<%= @default_text %>').split('+').join(' '));
     });
   </script>
 <% end -%>
@@ -38,7 +38,7 @@
 </div>
 
 <div style="margin:0px 10px">
-  <h4> <%="#{@results['ngrams'][0].count + @results['ngrams'][1].count} Results found"%></h4>
+  <h4> <%="#{@results['ngrams'][0].length + @results['ngrams'][1].length} Results found"%></h4>
 
   <div class="ngrams_list">
     <p class="section">Most Interesting:</p>

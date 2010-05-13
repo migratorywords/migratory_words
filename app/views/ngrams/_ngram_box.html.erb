@@ -16,7 +16,7 @@
     </span>
     <span style="float:right;font-size:11px;position:relative;"> 
       <img src="/images/magnifier_zoom_in.png"/>
-      <a style="position:relative;top:-3px" href="/ngrams/detail?text=<%= ngram['text'].gsub(' ', '+') %>">See Details</a>
+      <a style="position:relative;top:-3px" href="/ngrams/detail?text=<%= ngram['text'].gsub(' ', '+') %>&doc_count=<%= ngram['doc_count'] %>">See Details</a>
     </span><br/>
     <span>Found in: <%= ngram['doc_count'] %> documents<%= " | Present in the input text" if ngram['original'] %></span>
   </div>
