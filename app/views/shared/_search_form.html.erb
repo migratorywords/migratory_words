@@ -1,7 +1,7 @@
 <div class="input_form">
   <form action="/ngrams/search" method="get" accept-charset="utf-8">
     <div class="input_text"> 
-      <textarea name="text">Type a phrase you want to investigate or paste a bulk text.</textarea>
+      <textarea name="text" class="ui-corner-all">Type a phrase you want to investigate or paste a bulk text.</textarea>
     </div> 
     <div id="filter_toggle" style="margin-left:5px;"><a href="#">Show filters</a></div>
     <div class="filter_box">
@@ -12,7 +12,7 @@
         <div class="widget">
           <div id="word-length"></div>
           <input type="hidden" name="word_length_min" value="2" id="word-length-min">
-          <input type="hidden" name="word_length_max" value="8" id="word-length-max">
+          <input type="hidden" name="word_length_max" value="6" id="word-length-max">
         </div>
         <div style="float:left;">
           <span id="min">2</span> - <span id="max">6</span>
