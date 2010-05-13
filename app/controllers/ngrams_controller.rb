@@ -20,8 +20,8 @@ class NgramsController < ApplicationController
     corpus_id = 'bills cr fr hearings presidential reports prnewswire thehill aei brookings cato cfr cgdev civitas fraser nber ncpa rand urban'.split()
     params[:corpus] = 'all' if not params.has_key?(:corpus) or not corpus_id.include?(params[:corpus])
     params[:order] = 'doc' if not params.has_key?(:order) or not 'doc rarity'.split().include?(params[:order])
-    params[:word_length_min] = '2' if not params.has_key?(:word_length_min) or not '2 3 4 5 6'.split().include?(params[:word_length_min])
-    params[:word_length_max] = '6' if not params.has_key?(:word_length_max) or not '2 3 4 5 6'.split().include?(params[:word_length_max])
+    params[:word_length_min] = '2' if not params.has_key?(:word_length_min) or not '2 3 4 5 6 7 8 9 10'.split().include?(params[:word_length_min])
+    params[:word_length_max] = '6' if not params.has_key?(:word_length_max) or not '2 3 4 5 6 7 8 9 10'.split().include?(params[:word_length_max])
     params[:text] = 'president of south korea' if params[:text] == 'Type a phrase you want to investigate or paste a bulk text.'
     
     begin

@@ -12,8 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pr_categories  # The priority is based upon order of creation: first created -> highest priority.
   map.resources :corpora, :has_many => :documents, :collection => { :get_corpora_stat => :get }
   map.resources :documents
-  map.resources :home, :collection => {:index=>:get, :about => :get, :methodology=>:get}
-  #map.connect 'overall', :controller => "home", :action => "overall"
+  map.resources :home, :collection => {:index=>:get, :about => :get, :methodology=>:get, :team=>:get}
   map.connect 'top', :controller => "ngrams", :action => "top"
   map.connect 'top/:id', :controller => "ngrams", :action => "top_corpus"
   

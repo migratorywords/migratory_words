@@ -25,7 +25,9 @@
       $('#search_form textarea').text(unescape('<%= @default_text %>').split('+').join(' '));
       var default_value = 'Type a phrase you want to investigate or paste a bulk text.';
       if ($('textarea').text() == default_value) $('textarea').css('color', inactive_color);
-      $('#word-length').slider('option', 'values', [<%= @word_length_min %>, <%= @word_length_max %>])
+      $('#word-length').slider('option', 'values', [<%= @word_length_min %>, <%= @word_length_max %>]);
+      $('#word-length').next().val(<%= @word_length_min %>);
+      $('#word-length').next().next().val(<%= @word_length_max %>);
     });
   </script>
 <% end -%>

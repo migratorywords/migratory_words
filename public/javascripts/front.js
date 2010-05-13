@@ -28,7 +28,7 @@ $(document).ready(function  () {
   });
   
   // slider
-  $('#word-length').slider({min:2, max:6, step:1, values:[2,6], slide:updateWordLength, change:updateWordLength});
+  $('#word-length').slider({min:2, max:10, step:1, values:[2,6], slide:updateWordLength, change:updateWordLength});
   
 });
 
