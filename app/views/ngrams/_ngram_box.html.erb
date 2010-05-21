@@ -8,7 +8,7 @@
     </span>
     <span style="float:right;font-size:11px;position:relative;margin-left:20px;"> 
       <img src="/images/search_icon.gif"/>
-      <a style="position:relative;top:-3px" href='<%="http://128.32.33.245:3000/home/tool?input_text=#{ngram['text']}"%>' >Find similar</a>
+      <a style="position:relative;top:-3px" href='<%="http://128.32.33.245:3000/ngrams/search?text=#{ngram['text']}"%>' >Find similar</a>
     </span>
     <span style="float:right;font-size:11px;position:relative;margin-left:20px;"> 
       <img src="/images/ab-icon-add-my-favorites.png"/>
@@ -30,7 +30,7 @@
       <input type="radio" name="g" value="1"  onclick="visualize_docs_timeline('<%=ngram['text']%>', loaded_docs[<%=index%>], <%=index%>,loaded_doc_id[<%=index%>],1);" />
       Corpora view
     </span>
-    <span><%= link_to('view details')%></span>
+    <!--<span><%= link_to('view details')%></span>-->
     <span id="ajax-loader-<%=index%>" style="background-color:maroon;color:white;display:none;">Loading...</span>
     
     </div>

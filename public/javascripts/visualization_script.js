@@ -79,7 +79,7 @@ function visualize_docs_timeline(ngram,data,ngram_index,doc_id,viz_type){
     var cdata = pv.nest(flat_data).key(function(d){return d.document.corpus_id}).entries();
     var max_length = pv.max(cdata.map(function(d){return d.values.length}));
     var vscale = pv.Scale.ordinal(pv.range(cdata.length)).splitBanded(0,min_height,9/10);
-    var min_width = max_length * 10;
+    var min_width = max_length * 11;
     min_width = min_width < w ? w : min_width;
     vis.width(min_width + 250)
     var panels = viz_panel.add(pv.Panel)
